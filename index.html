@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Black Trap</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      height: 100%;
+      overflow: hidden;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      display: none;
+    }
+  </style>
+</head>
+<body onclick="playVideo()">
+  <video id="trap" autoplay muted playsinline>
+    <source src="whatis.mp4" type="video/mp4">
+  </video>
+
+  <script>
+    function playVideo() {
+      const vid = document.getElementById('trap');
+      vid.muted = false;
+      vid.volume = 1.0;
+      vid.style.display = 'block';
+      vid.play().catch(err => console.error('Play failed:', err));
+
+      // Optional fullscreen
+      if (vid.requestFullscreen) vid.requestFullscreen();
+    }
+  </script>
+</body>
+</html>
