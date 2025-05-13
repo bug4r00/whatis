@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Surprise!</title>
+  <title>Watch This</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+      height: 100%;
+    }
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      background: #000;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="margin:0; background:#000;">
-  <video autoplay muted playsinline controls style="width:100vw; height:100vh; object-fit:cover;">
+<body>
+  <div class="overlay" onclick="activate()"></div>
+  <video id="trap" autoplay muted playsinline>
     <source src="whatis.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    Your browser sucks at video.
   </video>
+
+  <script>
+    function activate() {
+      const vid = document.getElementById('trap');
+      vid.muted = false;
+      vid.volume = 1.0;
+      vid.play();
+      document.querySelector('.overlay').remove();
+
+      // Fullscreen if possible
+      if (vid.requestFullscreen) vid.requestFullscreen();
+      else if (vid.webkitRequestFullscreen) vid.webkitRequestFullscreen();
+      else if (vid.msRequestFullscreen) vid.msRequestFullscreen();
+    }
+  </script>
 </body>
 </html>
